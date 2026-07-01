@@ -25,3 +25,9 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+jwt:
+  access-secret: "replay-access-secret-key-256-bits-minimum-for-hs256-algorithm-2026"
+  refresh-secret: "replay-refresh-secret-key-256-bits-minimum-for-hs256-algorithm-2026"
+  access-expiration: 900000
+  refresh-expiration: 604800000
