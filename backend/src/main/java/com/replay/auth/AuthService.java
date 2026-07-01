@@ -1,5 +1,7 @@
 package com.replay.auth;
 
+import com.replay.common.DuplicateResourceException;
+import com.replay.common.UnauthorizedException;
 import com.replay.config.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +19,7 @@ public class AuthService {
     @Transactional
     public User register(String email, String password, String firstName, String lastName) {
         if (userRepository.findByEmail(email).isPresent()) {
-            throw new IllegalArgumentException("Email already registered");
+            throw new DuplicateResourceException("Email already registered");
         }
 
         User user = new User();
@@ -32,10 +34,10 @@ public class AuthService {
 
     public AuthResponse login(String email, String password) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid credentials"));
+                .orElseThrow(() -> new UnauthorizedException("Invalid credentials"));
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new IllegalArgumentException("Invalid credentials");
+            throw new UnauthorizedException("Invalid credentials");
         }
 
         String accessToken = jwtService.generateAccessToken(user.getEmail(), user.getRole().name());
@@ -50,15 +52,15 @@ public class AuthService {
     @Transactional
     public AuthResponse refresh(String refreshToken) {
         if (!jwtService.isRefreshTokenValid(refreshToken)) {
-            throw new IllegalArgumentException("Invalid or expired refresh token");
+            throw new UnauthorizedException("Invalid or expired refresh token");
         }
 
         String email = jwtService.extractEmailFromRefreshToken(refreshToken);
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new UnauthorizedException("Invalid or expired refresh token"));
 
         if (!refreshToken.equals(user.getRefreshToken())) {
-            throw new IllegalArgumentException("Invalid or expired refresh token");
+            throw new UnauthorizedException("Invalid or expired refresh token");
         }
 
         String newAccessToken = jwtService.generateAccessToken(user.getEmail(), user.getRole().name());

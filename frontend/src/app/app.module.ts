@@ -10,6 +10,10 @@ import { RegisterComponent } from './auth/register/register.component';
 import { authInterceptor } from './core/auth.interceptor';
 import { CatalogComponent } from './products/catalog/catalog.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { CartPageComponent } from './cart/cart-page/cart-page.component';
+import { CheckoutComponent } from './checkout/checkout/checkout.component';
+import { OrderListComponent } from './order/order-list/order-list.component';
+import { OrderDetailComponent } from './order/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { ProductDetailComponent } from './products/product-detail/product-detail
     LoginComponent,
     RegisterComponent,
     CatalogComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CartPageComponent,
+    CheckoutComponent,
+    OrderListComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,
