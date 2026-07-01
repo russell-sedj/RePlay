@@ -8,6 +8,7 @@ import com.replay.order.Order;
 import com.replay.order.OrderRepository;
 import com.replay.order.OrderStatus;
 import com.replay.product.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,7 @@ import java.util.List;
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
 @PreAuthorize("hasRole('ADMIN')")
+@Tag(name = "Admin", description = "Administration (stats, produits, categories, commandes, utilisateurs)")
 public class AdminController {
 
     private final UserRepository userRepository;

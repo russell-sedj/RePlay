@@ -1,6 +1,7 @@
 package com.replay.cart;
 
 import com.replay.auth.User;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/cart")
 @RequiredArgsConstructor
+@Tag(name = "Cart", description = "Gestion du panier")
 public class CartController {
 
     private final CartService cartService;

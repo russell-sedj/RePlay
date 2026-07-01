@@ -1,6 +1,7 @@
 package com.replay.order;
 
 import com.replay.auth.User;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import java.math.BigDecimal;
 @RestController
 @RequestMapping("/api/orders")
 @RequiredArgsConstructor
+@Tag(name = "Orders", description = "Gestion des commandes")
 public class OrderController {
 
     private final OrderService orderService;
