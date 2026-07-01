@@ -1,0 +1,42 @@
+<div class="space-y-6">
+  <h1 class="text-2xl font-bold">Dashboard</h1>
+
+  <div *ngIf="loading" class="text-center py-8 text-gray-500">Chargement...</div>
+
+  <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="bg-white rounded-lg shadow p-6 text-center">
+      <p class="text-3xl font-bold text-blue-600">{{ stats.totalUsers }}</p>
+      <p class="text-gray-500">Utilisateurs</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-6 text-center">
+      <p class="text-3xl font-bold text-green-600">{{ stats.totalOrders }}</p>
+      <p class="text-gray-500">Commandes</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-6 text-center">
+      <p class="text-3xl font-bold text-purple-600">{{ stats.totalRevenue | number:'1.2-2' }} EUR</p>
+      <p class="text-gray-500">Revenu total</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-6 text-center">
+      <p class="text-3xl font-bold text-orange-600">{{ stats.totalProducts }}</p>
+      <p class="text-gray-500">Produits</p>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && stats.topProducts.length > 0" class="bg-white rounded-lg shadow p-6">
+    <h2 class="font-semibold mb-4">Top 5 produits vendus</h2>
+    <table class="w-full">
+      <thead>
+        <tr class="text-left text-sm text-gray-500 border-b">
+          <th class="pb-2">Produit</th>
+          <th class="pb-2">Quantite vendue</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of stats.topProducts" class="border-b last:border-0">
+          <td class="py-2">{{ p.name }}</td>
+          <td class="py-2 font-medium">{{ p.totalSold }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

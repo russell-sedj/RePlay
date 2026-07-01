@@ -1,0 +1,113 @@
+<div>
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="text-2xl font-bold">Produits</h1>
+    <button (click)="openModal()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">+ Nouveau produit</button>
+  </div>
+
+  <div *ngIf="loading" class="text-center py-8 text-gray-500">Chargement...</div>
+
+  <div *ngIf="!loading" class="bg-white rounded-lg shadow overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="text-left bg-gray-50 border-b">
+          <th class="p-3">Nom</th>
+          <th class="p-3">Prix</th>
+          <th class="p-3">Stock</th>
+          <th class="p-3">Console</th>
+          <th class="p-3">Etat</th>
+          <th class="p-3">Archive</th>
+          <th class="p-3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of products" class="border-b hover:bg-gray-50">
+          <td class="p-3">{{ p.name }}</td>
+          <td class="p-3">{{ p.price | number:'1.2-2' }} EUR</td>
+          <td class="p-3">{{ p.stockQuantity }}</td>
+          <td class="p-3">{{ p.consoleType }}</td>
+          <td class="p-3">{{ p.condition }}</td>
+          <td class="p-3">{{ p.archived ? 'Oui' : 'Non' }}</td>
+          <td class="p-3">
+            <button (click)="openModal(p)" class="text-blue-600 hover:underline text-xs">Modifier</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="flex justify-center gap-2 mt-4" *ngIf="totalPages > 1">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 0" class="px-3 py-1.5 border rounded hover:bg-gray-100 disabled:opacity-50 text-sm">Precedent</button>
+    <span class="text-sm text-gray-600 py-1.5">Page {{ currentPage + 1 }} / {{ totalPages }}</span>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage >= totalPages - 1" class="px-3 py-1.5 border rounded hover:bg-gray-100 disabled:opacity-50 text-sm">Suivant</button>
+  </div>
+
+  <!-- Modal -->
+  <div *ngIf="showModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" (click)="showModal=false">
+    <div class="bg-white rounded-lg p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto" (click)="$event.stopPropagation()">
+      <h2 class="text-xl font-bold mb-4">{{ editId ? 'Modifier' : 'Nouveau' }} produit</h2>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block text-sm font-medium mb-1">Nom</label>
+          <input [(ngModel)]="form.name" class="w-full border rounded px-3 py-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Slug</label>
+          <input [(ngModel)]="form.slug" class="w-full border rounded px-3 py-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Description</label>
+          <textarea [(ngModel)]="form.description" class="w-full border rounded px-3 py-2 text-sm" rows="3"></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-sm font-medium mb-1">Prix (EUR)</label>
+            <input type="number" step="0.01" [(ngModel)]="form.price" class="w-full border rounded px-3 py-2 text-sm">
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Stock</label>
+            <input type="number" [(ngModel)]="form.stockQuantity" class="w-full border rounded px-3 py-2 text-sm">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-sm font-medium mb-1">Console</label>
+            <select [(ngModel)]="form.consoleType" class="w-full border rounded px-3 py-2 text-sm">
+              <option *ngFor="let c of consoleTypes" [value]="c">{{ c }}</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Etat</label>
+            <select [(ngModel)]="form.condition" class="w-full border rounded px-3 py-2 text-sm">
+              <option value="NEUF">Neuf</option>
+              <option value="BON_ETAT">Bon etat</option>
+              <option value="RECONDITIONNE">Reconditionne</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Categorie</label>
+          <select [(ngModel)]="form.categoryId" class="w-full border rounded px-3 py-2 text-sm">
+            <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Image URL</label>
+          <input [(ngModel)]="form.imageUrl" class="w-full border rounded px-3 py-2 text-sm">
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="checkbox" [(ngModel)]="form.archived" id="archived">
+          <label for="archived" class="text-sm">Archive</label>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-6">
+        <button (click)="showModal=false" class="px-4 py-2 border rounded hover:bg-gray-100 text-sm">Annuler</button>
+        <button (click)="save()" [disabled]="saving" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 text-sm">
+          {{ saving ? 'Enregistrement...' : 'Enregistrer' }}
+        </button>
+      </div>
+      <p *ngIf="error" class="text-red-500 text-sm mt-2">{{ error }}</p>
+    </div>
+  </div>
+</div>

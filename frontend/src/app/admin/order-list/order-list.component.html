@@ -1,0 +1,66 @@
+<div>
+  <h1 class="text-2xl font-bold mb-4">Commandes</h1>
+
+  <div class="mb-4">
+    <select [(ngModel)]="statusFilter" (change)="loadOrders()" class="border rounded px-3 py-2 text-sm">
+      <option value="">Tous les statuts</option>
+      <option value="PENDING">En attente</option>
+      <option value="CONFIRMED">Confirmee</option>
+      <option value="SHIPPED">Expediee</option>
+      <option value="DELIVERED">Livree</option>
+      <option value="CANCELLED">Annulee</option>
+    </select>
+  </div>
+
+  <div *ngIf="loading" class="text-center py-8 text-gray-500">Chargement...</div>
+
+  <div *ngIf="!loading" class="bg-white rounded-lg shadow overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="text-left bg-gray-50 border-b">
+          <th class="p-3">N°</th>
+          <th class="p-3">Client</th>
+          <th class="p-3">Date</th>
+          <th class="p-3">Total</th>
+          <th class="p-3">Transaction</th>
+          <th class="p-3">Statut</th>
+          <th class="p-3">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let o of orders" class="border-b hover:bg-gray-50">
+          <td class="p-3 font-medium">{{ o.id }}</td>
+          <td class="p-3">{{ o.userEmail }}</td>
+          <td class="p-3">{{ o.orderDate | date:'dd/MM/yyyy' }}</td>
+          <td class="p-3">{{ o.totalAmount | number:'1.2-2' }} EUR</td>
+          <td class="p-3 text-xs">{{ o.transactionId || '-' }}</td>
+          <td class="p-3">
+            <span class="px-2 py-1 rounded text-xs font-medium"
+                  [class.bg-yellow-100]="o.status==='PENDING'" [class.text-yellow-800]="o.status==='PENDING'"
+                  [class.bg-green-100]="o.status==='CONFIRMED'" [class.text-green-800]="o.status==='CONFIRMED'"
+                  [class.bg-blue-100]="o.status==='SHIPPED'" [class.text-blue-800]="o.status==='SHIPPED'"
+                  [class.bg-gray-100]="o.status==='DELIVERED'" [class.text-gray-800]="o.status==='DELIVERED'"
+                  [class.bg-red-100]="o.status==='CANCELLED'" [class.text-red-800]="o.status==='CANCELLED'">
+              {{ o.status }}
+            </span>
+          </td>
+          <td class="p-3">
+            <select [value]="o.status" (change)="updateStatus(o.id, $event)" class="border rounded px-2 py-1 text-xs">
+              <option value="PENDING">En attente</option>
+              <option value="CONFIRMED">Confirmee</option>
+              <option value="SHIPPED">Expediee</option>
+              <option value="DELIVERED">Livree</option>
+              <option value="CANCELLED">Annulee</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="flex justify-center gap-2 mt-4" *ngIf="totalPages > 1">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 0" class="px-3 py-1.5 border rounded hover:bg-gray-100 disabled:opacity-50 text-sm">Precedent</button>
+    <span class="text-sm text-gray-600 py-1.5">Page {{ currentPage + 1 }} / {{ totalPages }}</span>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage >= totalPages - 1" class="px-3 py-1.5 border rounded hover:bg-gray-100 disabled:opacity-50 text-sm">Suivant</button>
+  </div>
+</div>

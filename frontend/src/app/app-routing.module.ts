@@ -8,7 +8,7 @@ import { CartPageComponent } from './cart/cart-page/cart-page.component';
 import { CheckoutComponent } from './checkout/checkout/checkout.component';
 import { OrderListComponent } from './order/order-list/order-list.component';
 import { OrderDetailComponent } from './order/order-detail/order-detail.component';
-import { authGuard } from './core/auth.guard';
+import { authGuard, adminGuard } from './core/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent, canActivate: [authGuard] },
   { path: 'orders', component: OrderListComponent, canActivate: [authGuard] },
   { path: 'orders/:id', component: OrderDetailComponent, canActivate: [authGuard] },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [adminGuard] },
 ];
 
 @NgModule({

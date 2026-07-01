@@ -1,0 +1,15 @@
+<div class="flex min-h-screen bg-gray-100">
+  <nav class="w-64 bg-gray-900 text-white p-4 flex flex-col">
+    <h2 class="text-xl font-bold mb-6">Admin RePlay</h2>
+    <a routerLink="dashboard" routerLinkActive="bg-gray-700" class="px-3 py-2 rounded mb-1 hover:bg-gray-700 transition">Dashboard</a>
+    <a routerLink="products" routerLinkActive="bg-gray-700" class="px-3 py-2 rounded mb-1 hover:bg-gray-700 transition">Produits</a>
+    <a routerLink="categories" routerLinkActive="bg-gray-700" class="px-3 py-2 rounded mb-1 hover:bg-gray-700 transition">Categories</a>
+    <a routerLink="orders" routerLinkActive="bg-gray-700" class="px-3 py-2 rounded mb-1 hover:bg-gray-700 transition">Commandes</a>
+    <a routerLink="users" routerLinkActive="bg-gray-700" class="px-3 py-2 rounded mb-1 hover:bg-gray-700 transition">Utilisateurs</a>
+    <div class="flex-1"></div>
+    <a routerLink="/products" class="px-3 py-2 rounded hover:bg-gray-700 transition text-sm text-gray-300">← Retour au site</a>
+  </nav>
+  <main class="flex-1 p-6">
+    <router-outlet></router-outlet>
+  </main>
+</div>
