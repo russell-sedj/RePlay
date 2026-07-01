@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: replay
+      POSTGRES_USER: replay
+      POSTGRES_PASSWORD: replay
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  backend:
+    image: replay-backend:latest
+    build:
+      context: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/replay
+      SPRING_DATASOURCE_USERNAME: replay
+      SPRING_DATASOURCE_PASSWORD: replay
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      JWT_ACCESS_SECRET: "replay-access-secret-key-256-bits-minimum-for-hs256-algorithm-2026"
+      JWT_REFRESH_SECRET: "replay-refresh-secret-key-256-bits-minimum-for-hs256-algorithm-2026"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  frontend:
+    image: replay-frontend:latest
+    build:
+      context: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  pgdata:
