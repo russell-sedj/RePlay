@@ -1,0 +1,44 @@
+<div *ngIf="loading" class="text-center py-12 text-gray-500">Chargement...</div>
+
+<div *ngIf="!loading && product" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div>
+    <img [src]="product.imageUrl" [alt]="product.name" class="w-full rounded-lg shadow">
+  </div>
+
+  <div class="space-y-4">
+    <div class="flex gap-2">
+      <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded">{{ product.consoleType }}</span>
+      <span class="text-xs px-2 py-0.5 rounded"
+            [class.bg-green-100]="product.condition==='NEUF'"
+            [class.text-green-800]="product.condition==='NEUF'"
+            [class.bg-yellow-100]="product.condition==='BON_ETAT'"
+            [class.text-yellow-800]="product.condition==='BON_ETAT'"
+            [class.bg-orange-100]="product.condition==='RECONDITIONNE'"
+            [class.text-orange-800]="product.condition==='RECONDITIONNE'">
+        {{ product.condition === 'NEUF' ? 'Neuf' : product.condition === 'BON_ETAT' ? 'Bon etat' : 'Reconditionne' }}
+      </span>
+      <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded">{{ product.categoryName }}</span>
+    </div>
+
+    <h1 class="text-3xl font-bold">{{ product.name }}</h1>
+    <p class="text-3xl text-blue-600 font-bold">{{ product.price | number:'1.2-2' }} EUR</p>
+
+    <p class="text-gray-600">{{ product.description }}</p>
+
+    <p class="text-sm" [class.text-green-600]="product.stockQuantity > 0" [class.text-red-600]="product.stockQuantity === 0">
+      {{ product.stockQuantity > 0 ? 'En stock (' + product.stockQuantity + ' disponible(s))' : 'Rupture de stock' }}
+    </p>
+
+    <div class="flex items-center gap-4" *ngIf="product.stockQuantity > 0">
+      <label class="text-sm font-medium">Quantite:</label>
+      <input type="number" [(ngModel)]="quantity" min="1" [max]="product.stockQuantity"
+             class="w-20 border rounded px-2 py-1 text-center">
+      <button (click)="addToCart()"
+              class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+        Ajouter au panier
+      </button>
+    </div>
+
+    <p *ngIf="addedToCart" class="text-green-600 text-sm font-medium">Ajoute au panier !</p>
+  </div>
+</div>
