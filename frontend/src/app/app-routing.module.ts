@@ -5,6 +5,9 @@ import { RegisterComponent } from './auth/register/register.component';
 import { CatalogComponent } from './products/catalog/catalog.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { CartPageComponent } from './cart/cart-page/cart-page.component';
+import { CheckoutComponent } from './checkout/checkout/checkout.component';
+import { OrderListComponent } from './order/order-list/order-list.component';
+import { OrderDetailComponent } from './order/order-detail/order-detail.component';
 import { authGuard } from './core/auth.guard';
 
 const routes: Routes = [
@@ -14,6 +17,9 @@ const routes: Routes = [
   { path: 'products', component: CatalogComponent },
   { path: 'products/:slug', component: ProductDetailComponent },
   { path: 'cart', component: CartPageComponent, canActivate: [authGuard] },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [authGuard] },
+  { path: 'orders', component: OrderListComponent, canActivate: [authGuard] },
+  { path: 'orders/:id', component: OrderDetailComponent, canActivate: [authGuard] },
 ];
 
 @NgModule({

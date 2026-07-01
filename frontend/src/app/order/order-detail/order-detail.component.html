@@ -1,0 +1,56 @@
+<div *ngIf="loading" class="text-center py-8 text-gray-500">Chargement...</div>
+
+<div *ngIf="!loading && order">
+  <a routerLink="/orders" class="text-blue-600 hover:underline mb-4 inline-block">&larr; Retour</a>
+
+  <div class="bg-white rounded-lg shadow p-6 space-y-4">
+    <div class="flex justify-between items-start">
+      <div>
+        <h1 class="text-2xl font-bold">Commande N°{{ order.id }}</h1>
+        <p class="text-gray-500">{{ order.orderDate | date:'dd/MM/yyyy HH:mm' }}</p>
+      </div>
+      <span class="px-3 py-1 rounded text-sm font-medium"
+            [class.bg-yellow-100]="order.status==='PENDING'"
+            [class.text-yellow-800]="order.status==='PENDING'"
+            [class.bg-green-100]="order.status==='CONFIRMED'"
+            [class.text-green-800]="order.status==='CONFIRMED'"
+            [class.bg-blue-100]="order.status==='SHIPPED'"
+            [class.text-blue-800]="order.status==='SHIPPED'"
+            [class.bg-gray-100]="order.status==='DELIVERED'"
+            [class.text-gray-800]="order.status==='DELIVERED'"
+            [class.bg-red-100]="order.status==='CANCELLED'"
+            [class.text-red-800]="order.status==='CANCELLED'">
+        {{ order.status }}
+      </span>
+    </div>
+
+    <div *ngIf="order.transactionId" class="text-sm text-gray-600">
+      Transaction: {{ order.transactionId }}
+    </div>
+
+    <div>
+      <h2 class="font-semibold mb-2">Adresse de livraison</h2>
+      <p class="text-sm text-gray-600">{{ order.shippingAddress }}</p>
+    </div>
+
+    <div>
+      <h2 class="font-semibold mb-2">Articles</h2>
+      <div *ngFor="let item of order.items"
+           class="flex items-center gap-4 py-2 border-b last:border-0">
+        <img [src]="item.imageUrl" class="w-16 h-16 object-cover rounded">
+        <div class="flex-1">
+          <a [routerLink]="['/products', item.productSlug]" class="font-medium hover:text-blue-600">
+            {{ item.productName }}
+          </a>
+          <p class="text-sm text-gray-500">{{ item.unitPrice | number:'1.2-2' }} EUR x {{ item.quantity }}</p>
+        </div>
+        <p class="font-semibold">{{ item.subtotal | number:'1.2-2' }} EUR</p>
+      </div>
+    </div>
+
+    <div class="border-t pt-4 flex justify-between text-xl font-bold">
+      <span>Total</span>
+      <span>{{ order.totalAmount | number:'1.2-2' }} EUR</span>
+    </div>
+  </div>
+</div>
