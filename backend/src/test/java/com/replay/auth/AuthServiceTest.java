@@ -41,6 +41,7 @@ class AuthServiceTest {
         when(userRepository.save(any(User.class))).thenAnswer(invocation -> {
             User u = invocation.getArgument(0);
             u.setId(1L);
+            u.setCreatedAt(java.time.LocalDateTime.now());
             return u;
         });
 
