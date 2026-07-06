@@ -18,7 +18,7 @@
 
 | Layer | Technology | Notes |
 |-------|-----------|-------|
-| Backend | Java 17+, Spring Boot 3.4.1 | Maven, JPA, Security, Lombok |
+| Backend | Java 17+, Spring Boot 3.4.4 | Maven, JPA, Security, Lombok |
 | Auth | Spring Security + JWT | Access token 15min, refresh 7d |
 | DB | PostgreSQL 16 | Via Docker Compose |
 | Frontend | Angular 18 + Tailwind CSS | Standalone components |
@@ -52,20 +52,22 @@
 RePlay/
 ├── backend/
 │   ├── src/main/java/com/replay/
-│   │   ├── auth/          # AuthService, AuthController, JwtService, JwtAuthFilter, SecurityConfig, User, Role
+│   │   ├── admin/         # AdminController, DTOs
+│   │   ├── auth/          # User, Role, AuthController, AuthService, JwtService, JwtAuthFilter, SecurityConfig
 │   │   ├── cart/          # Cart, CartItem, CartService, CartController, DTOs
-│   │   ├── common/        # DuplicateResourceException, ResourceNotFoundException, UnauthorizedException
-│   │   ├── config/        # DataInitializer (seed data), OpenApiConfig
-│   │   ├── order/         # Order, OrderItem, OrderService, PaymentService, controllers, DTOs
+│   │   ├── common/        # DuplicateResourceException, ResourceNotFoundException, etc.
+│   │   ├── config/        # DataInitializer (seed data), OpenApiConfig, SecurityConfig
+│   │   ├── order/         # Order, OrderItem, OrderService, OrderController, DTOs
+│   │   ├── payment/       # PaymentController, PaymentService, PaymentResponse
 │   │   └── product/       # Product, Category, ProductService, ProductController, DTOs, enums
 │   └── Dockerfile
 ├── frontend/
 │   ├── src/app/
 │   │   ├── admin/         # AdminModule (lazy), DashboardComponent, ProductListComponent, etc.
-│   │   ├── auth/          # AuthService, LoginComponent, RegisterComponent, guards, interceptor
+│   │   ├── auth/          # LoginComponent, RegisterComponent, guards
 │   │   ├── cart/          # CartService, CartPageComponent
 │   │   ├── checkout/      # CheckoutComponent
-│   │   ├── core/          # auth.interceptor.ts
+│   │   ├── core/          # AuthService, auth.interceptor.ts
 │   │   ├── order/         # OrderService, OrderListComponent, OrderDetailComponent
 │   │   ├── products/      # ProductService, CatalogComponent, ProductDetailComponent
 │   │   └── app.module.ts, app-routing.module.ts
@@ -73,7 +75,7 @@ RePlay/
 │   └── proxy.conf.json
 ├── docker-compose.yml       # Dev: pg + pgadmin
 ├── docker-compose.prod.yml  # Prod: pg + backend:8080 + frontend:80
-├── .github/workflows/ci.yml # Multi-arch build job
+├── .github/workflows/ci.yml # Multi-arch build job (added Jul 2026)
 └── AGENTS.md                # THIS FILE
 ```
 
@@ -314,23 +316,25 @@ NES, SNES, NINTENDO_64, GAMECUBE, WII, WII_U, NINTENDO_SWITCH, GAMEBOY, GAMEBOY_
 
 ### Done
 - All 41 implementation tasks across 7 phases
-- 32 commits on main
+- 33 commits on main
 - 36/36 backend tests passing
 - Backend Docker image builds OK
 - Frontend builds via `npm start` works
+- 24 product images configured (Wikimedia/Wikipedia), 5 fallback picsum via @PrePersist
+- package-lock.json regenerated (chokidar mismatch resolved)
+- CI/CD workflow: `.github/workflows/ci.yml` with multi-arch build (amd64 + arm64)
+- Empty `user/` package removed (User entity lives in `auth/`)
 
-### Blocked / Pending
-1. **Product images**: 24 real URLs identified, need to set in DataInitializer (items 25-29 remain picsum)
-2. **package-lock.json**: needs regeneration (`rm package-lock.json && npm install`) due to chokidar@4.0.3 vs 3.6.0 mismatch
-3. **docker-compose.prod.yml frontend build**: fails at `npm ci` step because of above lockfile issue
-4. **No local Java/Node/Maven**: all builds via Docker containers only
+### Notes
+- Spring Boot version: 3.4.4 (AGENTS.md updated to match pom.xml)
+- `AuthService` physically located in `core/` not `auth/` (all imports correct)
+- No local Java/Node/Maven: all builds via Docker containers on Windows
 
 ### Next Steps
-1. Update `DataInitializer.java` with 24 verified image URLs
-2. Regenerate `package-lock.json`
-3. Commit changes (separate commits for images, lockfile, config files)
-4. Rebuild with `docker compose -f docker-compose.prod.yml up -d --build`
-5. Verify: frontend (:4200), API docs (:8080/swagger-ui.html), full flow
+1. Push to GitHub → CI builds and pushes multi-arch images to GHCR
+2. On Oracle Cloud VM: `docker compose -f docker-compose.prod.yml up -d`
+3. Set up Nginx reverse proxy with Let's Encrypt SSL (see `deploy/deploy.md`)
+4. Update JWT secrets in production environment
 
 ## 11. Git Conventions
 
@@ -357,7 +361,7 @@ Frontend Dockerfile: multi-stage (node:20-alpine → nginx:alpine)
 See `deploy/deploy.md` for full guide. VM Ampere A1:
 - `docker compose -f docker-compose.prod.yml up -d`
 - Nginx reverse proxy with Let's Encrypt SSL
-- GitHub Actions multi-arch build pushed to Docker Hub / registry
+- GitHub Actions multi-arch build pushed to GitHub Container Registry (ghcr.io)
 
 ## 14. ProductCondition Enum
 
