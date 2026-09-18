@@ -29,13 +29,6 @@ docker compose up -d
 - pgAdmin : http://localhost:5050 (admin@replay.fr / admin)
 - Swagger : http://localhost:8080/swagger-ui.html
 
-### Comptes de demo (seed automatique)
-
-| Role  | Email            | Mot de passe |
-|-------|------------------|--------------|
-| Admin | admin@replay.fr  | admin123     |
-| User  | user@replay.fr   | user123      |
-
 ## Structure du projet
 
 ```
