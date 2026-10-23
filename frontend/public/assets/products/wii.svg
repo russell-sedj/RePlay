@@ -1,18 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Wii">
   <rect width="800" height="600" fill="#f8fafc"/>
-  <rect x="0" y="0" width="800" height="10" fill="#9aa0a6"/>
-  <circle cx="694" cy="112" r="120" fill="#9aa0a6" opacity="0.07"/>
-  <text x="60" y="86" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#0f172a" letter-spacing="1">RePlay</text>
-  <text x="60" y="118" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#64748b">Console</text>
-  <text y="316" font-family="Arial,Helvetica,sans-serif" font-size="46" font-weight="700" fill="#0f172a"><tspan x="60" dy="0">Wii</tspan></text>
-  <rect x="60" y="488" width="128" height="38" rx="19" fill="#9aa0a6" opacity="0.14"/>
-  <text x="82" y="513" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="600" fill="#9aa0a6">Console</text>
-  
-  <g opacity="0.9">
-    <rect x="470" y="250" width="250" height="130" rx="18" fill="#9aa0a6" opacity="0.16"/>
-    <rect x="470" y="250" width="250" height="130" rx="18" fill="none" stroke="#9aa0a6" stroke-width="4" opacity="0.55"/>
-    <rect x="500" y="300" width="110" height="12" rx="6" fill="#9aa0a6" opacity="0.45"/>
-    <circle cx="678" cy="306" r="12" fill="#9aa0a6" opacity="0.45"/>
-    <circle cx="700" cy="340" r="6" fill="#9aa0a6" opacity="0.35"/>
-  </g>
+  <rect x="0" y="0" width="800" height="10" fill="#8b93a1"/>
+  <circle cx="400" cy="300" r="200" fill="#8b93a1" fill-opacity="0.06"/>
+  <g fill="#8b93a1" fill-opacity="0.14" stroke="#8b93a1" stroke-width="8" stroke-opacity="0.75" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="270" y="250" width="260" height="120" rx="22"/>
+      <rect x="310" y="300" width="110" height="10" rx="5" fill="#8b93a1" fill-opacity="0.55" stroke="none"/>
+      <circle cx="472" cy="305" r="10" fill="#8b93a1" fill-opacity="0.55" stroke="none"/>
+    </g>
+  <text x="48" y="70" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#0f172a" letter-spacing="1">RePlay</text>
+  <text x="48" y="96" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#64748b">Console</text>
 </svg>

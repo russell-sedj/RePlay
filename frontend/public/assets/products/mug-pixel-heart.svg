@@ -1,17 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Mug Pixel Heart">
   <rect width="800" height="600" fill="#f8fafc"/>
-  <rect x="0" y="0" width="800" height="10" fill="#f97316"/>
-  <circle cx="694" cy="112" r="120" fill="#f97316" opacity="0.07"/>
-  <text x="60" y="86" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#0f172a" letter-spacing="1">RePlay</text>
-  <text x="60" y="118" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#64748b">Goodies</text>
-  <text y="316" font-family="Arial,Helvetica,sans-serif" font-size="46" font-weight="700" fill="#0f172a"><tspan x="60" dy="0">Mug Pixel Heart</tspan></text>
-  <rect x="60" y="488" width="128" height="38" rx="19" fill="#f97316" opacity="0.14"/>
-  <text x="82" y="513" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="600" fill="#f97316">Goodies</text>
-  
-  <g opacity="0.9">
-    <path d="M540 240 h130 l-18 180 h-94 z" fill="#f97316" opacity="0.16" stroke="#f97316" stroke-width="4" stroke-opacity="0.55"/>
-    <circle cx="605" cy="258" r="9" fill="#f8fafc" stroke="#f97316" stroke-width="3" stroke-opacity="0.6"/>
-    <rect x="566" y="320" width="78" height="10" rx="5" fill="#f97316" opacity="0.38"/>
-    <rect x="566" y="344" width="54" height="10" rx="5" fill="#f97316" opacity="0.28"/>
+  <rect x="0" y="0" width="800" height="10" fill="#ea580c"/>
+  <circle cx="400" cy="300" r="200" fill="#ea580c" fill-opacity="0.06"/>
+  <g fill="#ea580c" fill-opacity="0.14" stroke="#ea580c" stroke-width="8" stroke-opacity="0.75" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M330 230 h140 l-20 190 h-100 z"/>
+    <circle cx="400" cy="252" r="10" fill="#ea580c" fill-opacity="0.6" stroke="none"/>
+    <rect x="360" y="320" width="80" height="10" rx="5" fill="#ea580c" fill-opacity="0.45" stroke="none"/>
+    <rect x="360" y="344" width="56" height="10" rx="5" fill="#ea580c" fill-opacity="0.35" stroke="none"/>
   </g>
+  <text x="48" y="70" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#0f172a" letter-spacing="1">RePlay</text>
+  <text x="48" y="96" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#64748b">Goodies</text>
 </svg>

@@ -1,16 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="The Legend of Zelda Ocarina of Time">
   <rect width="800" height="600" fill="#f8fafc"/>
-  <rect x="0" y="0" width="800" height="10" fill="#1f2937"/>
-  <circle cx="694" cy="112" r="120" fill="#1f2937" opacity="0.07"/>
-  <text x="60" y="86" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#0f172a" letter-spacing="1">RePlay</text>
-  <text x="60" y="118" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#64748b">Jeu</text>
-  <text y="288" font-family="Arial,Helvetica,sans-serif" font-size="46" font-weight="700" fill="#0f172a"><tspan x="60" dy="0">The Legend of Zelda</tspan><tspan x="60" dy="56">Ocarina of Time</tspan></text>
-  <rect x="60" y="488" width="120" height="38" rx="19" fill="#1f2937" opacity="0.14"/>
-  <text x="82" y="513" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="600" fill="#1f2937">Jeu</text>
-  
-  <g opacity="0.9">
-    <path d="M520 230 h150 v40 l18 22 v110 a10 10 0 0 1 -10 10 h-166 a10 10 0 0 1 -10 -10 v-150 a10 10 0 0 1 10 -10 z" fill="#1f2937" opacity="0.16" stroke="#1f2937" stroke-width="4" stroke-opacity="0.55"/>
-    <rect x="540" y="262" width="110" height="70" rx="8" fill="#1f2937" opacity="0.30"/>
-    <rect x="540" y="350" width="110" height="10" rx="5" fill="#1f2937" opacity="0.35"/>
-  </g>
+  <rect x="0" y="0" width="800" height="10" fill="#374151"/>
+  <circle cx="400" cy="300" r="200" fill="#374151" fill-opacity="0.06"/>
+  <g fill="#374151" fill-opacity="0.14" stroke="#374151" stroke-width="8" stroke-opacity="0.75" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M320 220 h160 v40 l20 24 v128 a12 12 0 0 1 -12 12 h-176 a12 12 0 0 1 -12 -12 v-180 a12 12 0 0 1 12 -12 z"/>
+      <rect x="345" y="262" width="110" height="76" rx="10" fill="#374151" fill-opacity="0.35" stroke="none"/>
+      <rect x="345" y="360" width="110" height="10" rx="5" fill="#374151" fill-opacity="0.4" stroke="none"/>
+    </g>
+  <text x="48" y="70" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#0f172a" letter-spacing="1">RePlay</text>
+  <text x="48" y="96" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#64748b">Jeu</text>
 </svg>

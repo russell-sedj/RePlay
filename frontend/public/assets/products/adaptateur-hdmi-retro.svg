@@ -1,17 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Adaptateur HDMI Retro">
   <rect width="800" height="600" fill="#f8fafc"/>
-  <rect x="0" y="0" width="800" height="10" fill="#f97316"/>
-  <circle cx="694" cy="112" r="120" fill="#f97316" opacity="0.07"/>
-  <text x="60" y="86" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#0f172a" letter-spacing="1">RePlay</text>
-  <text x="60" y="118" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#64748b">Accessoire</text>
-  <text y="316" font-family="Arial,Helvetica,sans-serif" font-size="46" font-weight="700" fill="#0f172a"><tspan x="60" dy="0">Adaptateur HDMI Retro</tspan></text>
-  <rect x="60" y="488" width="164" height="38" rx="19" fill="#f97316" opacity="0.14"/>
-  <text x="82" y="513" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="600" fill="#f97316">Accessoire</text>
-  
-  <g opacity="0.9">
-    <rect x="545" y="250" width="120" height="90" rx="16" fill="#f97316" opacity="0.16" stroke="#f97316" stroke-width="4" stroke-opacity="0.55"/>
-    <rect x="575" y="340" width="60" height="60" rx="10" fill="#f97316" opacity="0.22"/>
-    <rect x="590" y="400" width="10" height="26" rx="5" fill="#f97316" opacity="0.45"/>
-    <rect x="612" y="400" width="10" height="26" rx="5" fill="#f97316" opacity="0.45"/>
-  </g>
+  <rect x="0" y="0" width="800" height="10" fill="#ea580c"/>
+  <circle cx="400" cy="300" r="200" fill="#ea580c" fill-opacity="0.06"/>
+  <g fill="#ea580c" fill-opacity="0.14" stroke="#ea580c" stroke-width="8" stroke-opacity="0.75" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="330" y="230" width="140" height="105" rx="18"/>
+      <rect x="365" y="335" width="70" height="85" rx="12" fill="#ea580c" fill-opacity="0.22"/>
+      <rect x="382" y="420" width="12" height="30" rx="6" fill="#ea580c" fill-opacity="0.6" stroke="none"/>
+      <rect x="406" y="420" width="12" height="30" rx="6" fill="#ea580c" fill-opacity="0.6" stroke="none"/>
+    </g>
+  <text x="48" y="70" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#0f172a" letter-spacing="1">RePlay</text>
+  <text x="48" y="96" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#64748b">Accessoire</text>
 </svg>
