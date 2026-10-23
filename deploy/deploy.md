@@ -4,7 +4,7 @@
 
 ---
 
-## Étape 0 — Avant de commencer
+## Étape 0  -  Avant de commencer
 
 - [ ] Avoir un **compte GitHub** avec le dépôt `replay` pushé
 - [ ] Avoir un **compte Oracle Cloud** avec une VM Ampere A1 (toujours dans le Free Tier)
@@ -12,7 +12,7 @@
 
 ---
 
-## Étape 1 — Sur GitHub
+## Étape 1  -  Sur GitHub
 
 ### 1.1 Push du code
 
@@ -23,7 +23,7 @@ git push -u origin main
 
 ### 1.2 Vérifier le CI
 
-Aller sur **GitHub > Actions > CI — Multi-arch Build** :
+Aller sur **GitHub > Actions > CI  -  Multi-arch Build** :
 - Les jobs `test-backend` et `test-frontend` doivent passer au vert
 - Le job `build-and-push` doit builder et push les images vers `ghcr.io/<TON_USER>/backend` et `ghcr.io/<TON_USER>/frontend`
 
@@ -39,7 +39,7 @@ Pour qu'Oracle Cloud puisse pull les images privées depuis GHCR :
 
 ---
 
-## Étape 2 — Créer la VM Oracle Cloud
+## Étape 2  -  Créer la VM Oracle Cloud
 
 ### 2.1 Dans la console Oracle
 
@@ -47,7 +47,7 @@ Pour qu'Oracle Cloud puisse pull les images privées depuis GHCR :
 2. Configurer :
    - **Name** : `replay-vm`
    - **Image** : `Ubuntu 22.04 Minimal` (ou `Canonical Ubuntu 22.04`)
-   - **Shape** : `VM.Standard.A1.Flex` (4 OCPU, 24 GB RAM — gratuit)
+   - **Shape** : `VM.Standard.A1.Flex` (4 OCPU, 24 GB RAM  -  gratuit)
    - **SSH keys** : ajouter ta clé publique
 3. **Réseau** : ouvrir les ports **80** (HTTP), **443** (HTTPS), **22** (SSH)
 
@@ -61,7 +61,7 @@ ssh ubuntu@<IP_PUBLIQUE>
 
 ---
 
-## Étape 3 — Installer Docker sur la VM
+## Étape 3  -  Installer Docker sur la VM
 
 ```bash
 # Docker Engine
@@ -81,7 +81,7 @@ ssh ubuntu@<IP_PUBLIQUE>
 
 ---
 
-## Étape 4 — Se connecter à GHCR
+## Étape 4  -  Se connecter à GHCR
 
 ```bash
 echo "<TON_PAT_TOKEN>" | docker login ghcr.io -u <TON_USER> --password-stdin
@@ -96,7 +96,7 @@ docker pull ghcr.io/<TON_USER>/frontend:latest
 
 ---
 
-## Étape 5 — Préparer docker-compose.prod.yml sur la VM
+## Étape 5  -  Préparer docker-compose.prod.yml sur la VM
 
 Crée un dossier et le fichier compose :
 
@@ -161,7 +161,7 @@ wget https://raw.githubusercontent.com/<TON_USER>/replay/main/docker-compose.pro
 
 ---
 
-## Étape 6 — Lancer l'application
+## Étape 6  -  Lancer l'application
 
 ```bash
 cd ~/replay
@@ -184,7 +184,7 @@ curl http://localhost:8080/swagger-ui.html
 
 ---
 
-## Étape 7 — Nom de domaine + SSL (Let's Encrypt)
+## Étape 7  -  Nom de domaine + SSL (Let's Encrypt)
 
 > Optionnel mais fortement recommandé. Sans ça l'API ne tourne qu'en HTTP.
 
@@ -270,7 +270,7 @@ docker compose -f docker-compose.prod.yml up -d
 
 ---
 
-## Étape 8 — Mettre à jour l'application
+## Étape 8  -  Mettre à jour l'application
 
 Après un push sur `main` :
 1. Le CI build et push automatiquement les nouvelles images vers GHCR
@@ -298,7 +298,7 @@ chmod +x ~/replay/update.sh
 
 ---
 
-## Étape 9 — Backup PostgreSQL
+## Étape 9  -  Backup PostgreSQL
 
 Backup quotidien via cron :
 

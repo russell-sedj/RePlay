@@ -1,4 +1,4 @@
-# RePlay — Agent Context File
+# RePlay  -  Agent Context File
 
 > Full-stack e-commerce platform for retro gaming (Spring Boot 3.4 + Angular 18)
 > Target: Oracle Cloud Free Tier ARM64 (Ampere A1)
@@ -29,11 +29,11 @@
 | Payment | Fake (mock) | Transaction ID: TXN-UUID-xxx |
 
 ### Ports
-- `:4200` — Angular dev (proxy `/api` → `:8080`)
-- `:8080` — Spring Boot API
-- `:5432` — PostgreSQL
-- `:5050` — pgAdmin
-- `:80` — Production frontend (nginx)
+- `:4200`  -  Angular dev (proxy `/api` → `:8080`)
+- `:8080`  -  Spring Boot API
+- `:5432`  -  PostgreSQL
+- `:5050`  -  pgAdmin
+- `:80`  -  Production frontend (nginx)
 
 ## 3. Key Architectural Decisions
 
@@ -41,7 +41,7 @@
 2. **Stock decrement**: at payment confirmation (NOT at cart add)
 3. **Admin**: same SPA, lazy-loaded module with `AdminGuard` (role check)
 4. **Product images**: Wikimedia Commons (Evan-Amos public domain photos) for consoles/controllers; Wikipedia fair-use box art for games; picsum fallback for generic accessories/goodies
-5. **Payment**: fake/mock — no Stripe, generates UUID as transaction ID
+5. **Payment**: fake/mock  -  no Stripe, generates UUID as transaction ID
 6. **Exceptions**: project-specific (`DuplicateResourceException`, `UnauthorizedException`, `ResourceNotFoundException`) in `com.replay.common`
 7. **CORS**: allows `localhost:4200` only
 8. **No JavaScript/Node/Maven locally**: all builds via Docker containers on Windows
@@ -220,7 +220,7 @@ NES, SNES, NINTENDO_64, GAMECUBE, WII, WII_U, NINTENDO_SWITCH, GAMEBOY, GAMEBOY_
 
 **Categories** (5): Consoles, Jeux, Manettes, Accessoires, Goodies
 
-**Products** (29) — see section 9 for image URLs:
+**Products** (29)  -  see section 9 for image URLs:
 
 ### Consoles (9)
 | # | Name | Slug | Price | Condition | Console | Stock |
@@ -273,7 +273,7 @@ NES, SNES, NINTENDO_64, GAMECUBE, WII, WII_U, NINTENDO_SWITCH, GAMEBOY, GAMEBOY_
 
 ## 9. Product Image URLs
 
-### Confirmed — Wikimedia Commons (Evan-Amos public domain)
+### Confirmed  -  Wikimedia Commons (Evan-Amos public domain)
 
 **Consoles:**
 1. `https://upload.wikimedia.org/wikipedia/commons/8/82/Nintendo-Entertainment-System-NES-Console-FL.jpg`
@@ -296,7 +296,7 @@ NES, SNES, NINTENDO_64, GAMECUBE, WII, WII_U, NINTENDO_SWITCH, GAMEBOY, GAMEBOY_
 **Accessory:**
 15. `https://upload.wikimedia.org/wikipedia/commons/f/f9/Sony-PS2-Memory-Card.jpg`
 
-### Confirmed — Wikipedia (fair-use box art)
+### Confirmed  -  Wikipedia (fair-use box art)
 
 16. `https://upload.wikimedia.org/wikipedia/en/3/32/Super_Mario_World_Coverart.png`
 17. `https://upload.wikimedia.org/wikipedia/en/5/5d/The_Legend_of_Zelda-_Ocarina_of_Time_box_art.jpg`

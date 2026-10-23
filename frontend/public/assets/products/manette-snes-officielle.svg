@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Manette SNES Officielle">
+  <rect width="800" height="600" fill="#f8fafc"/>
+  <rect x="0" y="0" width="800" height="10" fill="#6b5b95"/>
+  <circle cx="694" cy="112" r="120" fill="#6b5b95" opacity="0.07"/>
+  <text x="60" y="86" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" fill="#0f172a" letter-spacing="1">RePlay</text>
+  <text x="60" y="118" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#64748b">Manette</text>
+  <text y="316" font-family="Arial,Helvetica,sans-serif" font-size="46" font-weight="700" fill="#0f172a"><tspan x="60" dy="0">Manette SNES Officielle</tspan></text>
+  <rect x="60" y="488" width="128" height="38" rx="19" fill="#6b5b95" opacity="0.14"/>
+  <text x="82" y="513" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="600" fill="#6b5b95">Manette</text>
+  
+  <g opacity="0.9">
+    <path d="M520 270 q40 -40 90 -22 q30 -22 66 -8 q40 16 46 78 q6 60 -18 84 q-26 24 -48 -6 l-26 -38 h-74 l-26 38 q-22 30 -48 6 q-24 -24 -18 -84 q6 -62 56 -48 z" fill="#6b5b95" opacity="0.16" stroke="#6b5b95" stroke-width="4" stroke-opacity="0.55"/>
+    <circle cx="560" cy="320" r="16" fill="#6b5b95" opacity="0.40"/>
+    <circle cx="650" cy="300" r="11" fill="#6b5b95" opacity="0.40"/>
+    <circle cx="676" cy="326" r="11" fill="#6b5b95" opacity="0.40"/>
+  </g>
+</svg>
