@@ -40,11 +40,11 @@
 1. **Refresh token**: stored in `localStorage` + DB column `users.refresh_token` for server-side invalidation
 2. **Stock decrement**: at payment confirmation (NOT at cart add)
 3. **Admin**: same SPA, lazy-loaded module with `AdminGuard` (role check)
-4. **Product images**: Wikimedia Commons (Evan-Amos public domain photos) for consoles/controllers; Wikipedia fair-use box art for games; picsum fallback for generic accessories/goodies
+4. **Product images**: 29 self-hosted SVG placeholders under `frontend/public/assets/products/`, one per product slug, served at `/assets/products/<slug>.svg`; `Product.@PrePersist` falls back to a picsum URL only when `imageUrl` is null (admin-created products)
 5. **Payment**: fake/mock  -  no Stripe, generates UUID as transaction ID
 6. **Exceptions**: project-specific (`DuplicateResourceException`, `UnauthorizedException`, `ResourceNotFoundException`) in `com.replay.common`
 7. **CORS**: allows `localhost:4200` only
-8. **No JavaScript/Node/Maven locally**: all builds via Docker containers on Windows
+8. **No local Java/Maven**: backend builds via Docker; Node is available for the frontend
 
 ## 4. Project Structure
 
@@ -53,10 +53,10 @@ RePlay/
 ├── backend/
 │   ├── src/main/java/com/replay/
 │   │   ├── admin/         # AdminController, DTOs
-│   │   ├── auth/          # User, Role, AuthController, AuthService, JwtService, JwtAuthFilter, SecurityConfig
+│   │   ├── auth/          # User, Role, AuthController, AuthService
 │   │   ├── cart/          # Cart, CartItem, CartService, CartController, DTOs
 │   │   ├── common/        # DuplicateResourceException, ResourceNotFoundException, etc.
-│   │   ├── config/        # DataInitializer (seed data), OpenApiConfig, SecurityConfig
+│   │   ├── config/        # SecurityConfig, JwtService, JwtAuthFilter, OpenApiConfig, DataInitializer
 │   │   ├── order/         # Order, OrderItem, OrderService, OrderController, DTOs
 │   │   ├── payment/       # PaymentController, PaymentService, PaymentResponse
 │   │   └── product/       # Product, Category, ProductService, ProductController, DTOs, enums
@@ -271,46 +271,9 @@ NES, SNES, NINTENDO_64, GAMECUBE, WII, WII_U, NINTENDO_SWITCH, GAMEBOY, GAMEBOY_
 | 28 | Poster Carte du Monde Retro Gaming | poster-carte-monde-retro | 14.99 | NEUF | AUTRE | 30 |
 | 29 | Mug Pixel Heart | mug-pixel-heart | 9.99 | NEUF | AUTRE | 60 |
 
-## 9. Product Image URLs
+## 9. Product Images
 
-### Confirmed  -  Wikimedia Commons (Evan-Amos public domain)
-
-**Consoles:**
-1. `https://upload.wikimedia.org/wikipedia/commons/8/82/Nintendo-Entertainment-System-NES-Console-FL.jpg`
-2. `https://upload.wikimedia.org/wikipedia/commons/3/36/SNES-Mod1-Console-Set.png`
-3. `https://upload.wikimedia.org/wikipedia/commons/b/be/N64-Console-Set.png`
-4. `https://upload.wikimedia.org/wikipedia/commons/4/46/GameCube-Console-Set.png`
-5. `https://upload.wikimedia.org/wikipedia/commons/f/f3/Wii-Console.png`
-6. `https://upload.wikimedia.org/wikipedia/commons/4/4f/PS2-Slim-Console-Set.png`
-7. `https://upload.wikimedia.org/wikipedia/commons/5/5e/PS3-Consoles-Set.jpg`
-8. `https://upload.wikimedia.org/wikipedia/commons/0/09/Game-Boy-Advance-SP-Mario-Left.png`
-9. `https://upload.wikimedia.org/wikipedia/commons/4/4b/Nintendo-DS-Lite-Open.png`
-
-**Controllers:**
-10. `https://upload.wikimedia.org/wikipedia/commons/4/4a/NES_controller.JPG`
-11. `https://upload.wikimedia.org/wikipedia/commons/3/31/SNES-Controller-in-Hand.jpg`
-12. `https://upload.wikimedia.org/wikipedia/commons/5/53/Nintendo-64-Controller-Gray.jpg`
-13. `https://upload.wikimedia.org/wikipedia/commons/8/8e/PS2-DualShock2-Controller.jpg`
-14. `https://upload.wikimedia.org/wikipedia/commons/a/a5/GameCube_controller.png`
-
-**Accessory:**
-15. `https://upload.wikimedia.org/wikipedia/commons/f/f9/Sony-PS2-Memory-Card.jpg`
-
-### Confirmed  -  Wikipedia (fair-use box art)
-
-16. `https://upload.wikimedia.org/wikipedia/en/3/32/Super_Mario_World_Coverart.png`
-17. `https://upload.wikimedia.org/wikipedia/en/5/5d/The_Legend_of_Zelda-_Ocarina_of_Time_box_art.jpg`
-18. `https://upload.wikimedia.org/wikipedia/en/9/9a/Mario_Kart_64_box.png`
-19. `https://upload.wikimedia.org/wikipedia/en/4/46/Pok%C3%A9mon_Red_Version_box_art.jpg`
-20. `https://upload.wikimedia.org/wikipedia/en/0/0b/Super_Smash_Bros_Melee_box_art.png`
-21. `https://upload.wikimedia.org/wikipedia/en/1/1a/Wii_Sports_European_box_art.jpg`
-22. `https://upload.wikimedia.org/wikipedia/en/7/71/Gran_Turismo_4_box_art.jpg`
-23. `https://upload.wikimedia.org/wikipedia/en/4/46/Video_Game_Cover_-_The_Last_of_Us.jpg`
-24. `https://upload.wikimedia.org/wikipedia/en/8/8d/Sonic_the_Hedgehog_2_Box_Art.jpg`
-
-### Picsum fallback (no suitable free image found)
-
-25-29. Adaptateur HDMI, Chargeur, T-Shirt, Poster, Mug → picsum (via @PrePersist default)
+Product images are 29 self-hosted SVG placeholders under `frontend/public/assets/products/`, one per product slug (for example `nes-classic-edition.svg`). The seed data in `DataInitializer` references them at `/assets/products/<slug>.svg`; `Product.@PrePersist` keeps a picsum fallback for a product created without an image.
 
 ## 10. Current State
 
@@ -319,22 +282,21 @@ NES, SNES, NINTENDO_64, GAMECUBE, WII, WII_U, NINTENDO_SWITCH, GAMEBOY, GAMEBOY_
 - 40+ commits on main
 - 36/36 backend tests passing
 - Backend Docker image builds OK
-- Frontend builds via `npm start` works
-- 24 product images configured (Wikimedia/Wikipedia), 5 fallback picsum via @PrePersist
+- Frontend production build works (Angular 18, Docker multi-stage)
+- 29 self-hosted SVG product images under `frontend/public/assets/products/`
 - package-lock.json regenerated (chokidar mismatch resolved)
 - CI/CD workflow: `.github/workflows/ci.yml` with multi-arch build (amd64 + arm64)
 - Empty `user/` package removed (User entity lives in `auth/`)
 
 ### Notes
 - Spring Boot version: 3.4.4 (AGENTS.md updated to match pom.xml)
-- `AuthService` physically located in `core/` not `auth/` (all imports correct)
-- No local Java/Node/Maven: all builds via Docker containers on Windows
+- Frontend `AuthService` lives in `core/` (the `auth/` folder only holds the login/register components); backend `AuthService` lives in `com.replay.auth`
+- No local Java/Maven: backend builds via Docker; Node is available for the frontend
 
 ### Next Steps
-1. Push to GitHub → CI builds and pushes multi-arch images to GHCR
-2. On Oracle Cloud VM: `docker compose -f docker-compose.prod.yml up -d`
-3. Set up Nginx reverse proxy with Let's Encrypt SSL (see `deploy/deploy.md`)
-4. Update JWT secrets in production environment
+1. Deploy on Oracle Cloud (see `deploy/deploy.md`)
+2. Set up Nginx reverse proxy with Let's Encrypt SSL
+3. Update JWT secrets in production environment
 
 ## 11. Git Conventions
 
